@@ -473,3 +473,93 @@ const ComponentB = {
     }).$mount('#app')// 如果没有给定el属性可以这样加载DOM
 </script>
 ```
+## 在Vue中使用Ajax
+在Vue1.x版本中推荐使用的是vue-resource
+
+官网文档是这个：https://github.com/pagekit/vue-resource/blob/develop/docs/http.md
+我们先用的是Vue2.x版本，官方推荐用的是Axios
+
+###  Axios基础
+1. 安装Axios库
+```cmd
+yarn add axios
+```
+2. 页面引入axios
+```html
+<script src="./node_modules/axios/dist/axios.js"></script>
+```
+3. 使用axios发请求
+
+  官网文档是这个：https://github.com/axios/axios/blob/master/README.md
++ 创建假数据/public/db.json做测试
+```json
+{
+    "code": 2000,
+    "flag": true,
+    "message": "获取成功",
+    "data": {
+        "id": 10,
+        "username": "zhangsan",
+        "name": "张三",
+        "age": "25",
+        "mobile": "13800138000",
+        "salary": "5500",
+        "entryDate": 1564577990837
+    }
+}
+```
++ 发请求代码
+```js
+axios.get('public/db.json').then(response => {
+    console.log(response)
+}).catch(error => {// 当resoponse返回的status为400以上时调用catch
+    console.log(error)
+})
+```
+> 如果用文件地址访问的话会报跨域错误，所以需要以http形式访问，vscode需要安装Live Server插件
+> 注意返回的response对象，里面的data才是我们返回的数据
+
+<img src="https://images.gitee.com/uploads/images/2019/1225/111302_61fa7820_5449551.png" alt="输入图片说明" title="屏幕截图.png" style="zoom:150%;" />
+在vscode界面右下角会多出**GO LIVE**图标，点击即可
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1225/111627_acde6576_5449551.png "屏幕截图.png")
+### Vue+Axios
+```html
+<p v-text="`ID：${user.id}`"></p>
+<p v-text="`用户名：${user.username}`"></p>
+<p v-text="`姓名：${user.name}`"></p>
+<p v-text="`年龄：${user.age}`"></p>
+<p v-text="`手机：${user.mobile}`"></p>
+<p v-text="`年薪：${user.salary}`"></p>
+<p v-text="`入职日期：${user.entryDate}`"></p>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            user: {
+                id: 0,
+                username: '',
+                name: '',
+                age: 0,
+                mobile: '',
+                salary: 0,
+                entryDate: 0
+            }
+        },
+        created() {// created生命周期是最早能得到data的地方，所有一般在这里渲染初始化数据
+            this.getData()
+        },
+        methods: {
+            getData() {
+                axios.get('public/db.json').then(response => {
+                    let resp = response.data
+                    if (resp.code === 2000) {
+                        this.user = resp.data
+                    }
+                })
+            }
+        },
+    })
+</script>
+```
+> created生命周期是最早能得到data的地方，所有一般在这里渲染初始化数据
