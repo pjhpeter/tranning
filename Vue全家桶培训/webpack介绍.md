@@ -329,7 +329,16 @@ module.exports = {
     }
 }
 ```
-3. 重新打包
+3. 在src目录下创建images目录，放入一张图片
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/200321_cdfde2ae_5449551.png "屏幕截图.png")
+4. 修改style.css
+```css
+body {
+    background-color: red;
+    background-image: url("../images/background.bmp");
+}
+```
+5. 重新打包
 ```cmd
 yarn build
 ```
