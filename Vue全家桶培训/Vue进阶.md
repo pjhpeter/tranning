@@ -563,3 +563,110 @@ axios.get('public/db.json').then(response => {
 </script>
 ```
 > created生命周期是最早能得到data的地方，所有一般在这里渲染初始化数据
+
+## 了解前端项目构建打包
+[webpack介绍](webpack介绍.md)
+
+## Vue CLI脚手架
+### 什么是Vue CLI
+Vue CLI是Vue官方提供的快速项目构建枸橘，集成了webpack，内置了大量常用工具，使项目构建更加标准化，是使用Vue全家桶开发项目的必备利器。
+### 安装Vue CLI
+可全局安装和局部安装。
+```cmd
+yarn global add @vue/cli -D
+```
+### 使用Vue构建项目
+```cmd
+vue create
+```
+> 如果没有配置yarn全局安装目录的环境变量，这里会报找不到命令的错误
+
+Vue会让你为项目做一些初始化选项
+1. 选择项目需要的组件库依赖
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/104953_2cfd5c7e_5449551.png "屏幕截图.png")
+选择第二项我们会看到很多选项
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/105125_1bf08aec_5449551.png "屏幕截图.png")
+    + Babel：将项目中ES6规范代码转换成ES5规范
+    + TypeScript：简称TS，微软开发脚本语言，与JavaScript相比，TypeScript  进步的地方包括：加入注释，让编译器理解所支持的对象和函数，编译器会移除注释，不会增加开销；增加一个完整的类结构，使之更像是传统的面向对象语言。选择这一项会为项目添加对TS的支持。
+    + Progressive Web App (PWA) Support：[问简书](https://www.jianshu.com/p/098af61bbe04)，选择该项会为项目提供PWA支持。
+    + Router：使用路由组件，选择该项会添加Vue Router依赖
+    + Vuex：Vue官方提供的状态存储工具，选择该项会添加Vuex依赖
+    + CSS Pre-processors：添加CSS预处理语言支持，比如sess、less和stylus
+    + Linter / Formatter：添加代码检查工具依赖
+    + Unit Testing：添加单元测试组件依赖
+    + E2E Testing：添加模拟黑盒测试工具依赖，E2E测试和单元测试的区别是单元测试代码需要根据单元逻辑的变化而变化，验证逻辑的准确性，而E2E是对需求的验证，不管单元逻辑如何改变，只要需求不变，E2E的测试代码是不需要改变的。
+> 按空格选择某一项，按回车保持选择设置
+
+2. 如果选择了Router会询问是否选择历史路由
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/113028_373027ef_5449551.png "屏幕截图.png")
+3. 如果选择了Linter / Formatter会询问选择哪种代码检查配置，这里推荐选择第4项
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/113210_7daf5153_5449551.png "屏幕截图.png")
+然后又会问什么时候进行代码检查，建议选择保存时就进行代码检查
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/113404_cec91c9c_5449551.png "屏幕截图.png")
+4. 接下来会询问各个组件的配置文件保存方法，分开保存还是全部保存到package.json，这里推荐选择第1项分开保存
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/113532_f903ca50_5449551.png "屏幕截图.png")
+5. 最后会问是否要将刚才的选择想保存成个性化设置，以后创建项目可以直接使用，不必再次选择
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/113813_4a4af71f_5449551.png "屏幕截图.png")
+如果选择是，会让你为自己的设置起个名字
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/114050_c9c96b4a_5449551.png "屏幕截图.png")
+6. 如果电脑上同时安装了Yarn和NPM，会询问使用哪个工具来管理项目依赖
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/114150_e4fbf4c8_5449551.png "屏幕截图.png")
+> 完成以上所有选项后，项目就会自动构建，耐心等待......
+
+项目构建成功后会看到项目目录结构是这样的
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/114438_04c39dde_5449551.png "屏幕截图.png")
++ public目录存放不会被webpack压缩编译的资源
++ assets目录存放静态资源，如图片、CSS等
++ components目录存放Vue小组件
++ router目录存放路由组件
++ store目录存放Vuex的代码
++ views目录存放页面组件，按照Vue的规范框架页面是views，框架内容组件是components
+> Vue CLI默认提供了构建命令，查看package.json
+
+```json
+"scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  }
+```
+## 前端项目的部署
++ 一般选择Nginx，有时会选择NodeJS，极少使用Tomcat
++ 这里只介绍Nginx部署方式
++ Nginx下载地址：http://nginx.org/en/download.html
++ 下载后解压就可以用
+1. 打包项目
+```cmd
+yarn build
+```
+打包后的结构是这样的
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/120118_891aa321_5449551.png "屏幕截图.png")
+
+2. 将dist目录重命名成项目名称，再将整个目录复制到Ngin的html目录下
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/120906_90831c61_5449551.png "屏幕截图.png")
+3. 修改Nginx配置文件nginx/conf/nginx.conf
+找到下面这一项
+```
+location / {
+    root   html;
+    index  index.html index.htm;
+}
+```
+改成这样
+```
+location / {
+    root   html/vue-project-training;
+    index  index.html index.htm;
+}
+```
+4. 启动Nginx服务
+在Nginx根目录进入命令行，输入命令
+```cmd
+nginx
+```
+停止Nginx服务命令
+```cmd
+nginx -s stop
+```
+5. 浏览器访问localhost
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/121718_c5f14010_5449551.png "屏幕截图.png")
