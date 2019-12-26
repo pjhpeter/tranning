@@ -2,6 +2,7 @@
 ## 什么是webpack
 webpack是**前端打包工具**，能让浏览器支持模块化，自动分析项目的所有依赖关系，然后按照指定的规则生产对应的静态资源。
 官网在这：https://www.webpackjs.com/
+
 + webpack核心主要进行 JavaScript 资源打包
 + 如下图，它可以结合其他插件工具，将多种静态资源css、png、sass 分类转换成一个个静态文件，这样可以减少页面的请求。
 + 可集成 babel 工具实现 EcmaScript 6 转 EcmaScript 5 ，解决兼容性问题
@@ -32,8 +33,9 @@ webpack与项目一起，不管项目代码在哪里使用都能保证webpack版
 ## webpack-cli
 如果是webpack4以上版本，还需要安装webpack-cli才能使用webpack命令。
 安装webpack-cli的方式与webpack的安装方式要保持一致，即webpack是全局安装的，webpack-cli也要全局安装。
+
 ```cmd
-yarn global add webpack-cli 或 yarn add webpack-cli
+yarn global add webpack-cli --dev 或 yarn add webpack-cli --dev
 ```
 安装成功后可以查看版本
 + 全局安装
@@ -46,7 +48,7 @@ webpack -v
 项目路径\node_modules\.bin\webpack -v
 > 4.41.4
 ```
-> 由于局部安装必须要找到.bin目录才能执行wbpack命令，每次输入比较麻烦，yarn提供简写方式
+> 由于局部安装必须要找到.bin目录才能执行webpack命令，每次输入比较麻烦，yarn提供简写方式
 > yarn webpack -v
 > 可以通过一条命令一并安装这两个库，用空格隔开，-D跟--dev一个意思
 >  yarn add webpack webpack-cli -D
@@ -138,10 +140,10 @@ module.exports = {
         // path必须是绝对路径，所以这里需要引入nodejs的路径小工具来帮助我们找到当前目录的绝对路径
         // __dirname是path内置的全局变量，当前js文件所在目录的绝对路径
         path : path.join(__dirname, './dist/'),
-        filename: 'bundle.js',
-        // 打包模式有三种，development、production、none
-        mode: 'development'
-    }
+        filename: 'bundle.js'
+    },
+    // 打包模式有三种，development、production、none
+    mode: 'development'
 }
 ```
 **打包模式说明**
@@ -239,6 +241,7 @@ console.log(bar.decrease())
 ## 打包CSS/Images等资源
 webpack本身只针对JS打包的，默认是不支持打包CSS/Images等资源。
 webpack提供了一套loader规范，运行自行编写loader来支持各种格式资源的打包。
+
 ### 打包CSS资源
 1. 安装stye-loader和css-loader依赖
   + syle-loader让JS认识CSS
@@ -281,7 +284,7 @@ body {
 ```
 4. 在main.js中引入css文件
 ```js
-import './css/style.css'
+import '../css/style.css'
 ```
 5. 重新打包项目看效果
 ```cmd
@@ -528,7 +531,7 @@ module.exports = {
             },
             {
                 test: /\.m?js$/,
-                excude: /(node_modules|bower_components)/, // 排除的目录
+                exclude: /(node_modules|bower_components)/, // 排除的目录
                 use: {
                     loader: 'babel-loader',
                     options: {

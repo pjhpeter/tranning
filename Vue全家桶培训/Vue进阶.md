@@ -202,6 +202,7 @@ filters: {
 ### 什么是组件化
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/1224/114638_e71540c7_5449551.png "屏幕截图.png")
 一个大型应用有多个独立的，高复用的小组件组成，即插即用，提高应用的开发效率，降低维护成本。**对于Vue而言，每一个组件都具有Vue示例的全部特性。**
+
 ### 组件定义
 + 全局组件定义
 ```js
@@ -235,9 +236,9 @@ new Vue({
 
 })
 ```
-> + 组件的命名可以是驼峰式，也可以是下划线分隔
-> + HTML中引用组件的DOM则只能用下划线分隔
-> + 官方强烈推荐组件名称全小写用下划线分隔
+> + 组件的命名可以是驼峰式，也可以是横杠分隔
+> + HTML中引用组件的DOM则只能用横杠分隔
+> + 官方强烈推荐组件名称全小写用横杠分隔
 > + 组件的data属性必须返回一个**function**
 
 ### 组件使用示例
@@ -375,10 +376,12 @@ const ComponentB = {
     }
 }
 ```
+> 自定义事件名称必须为全小写
+
 ### 非父子组件信息传递
 有两种方式：
 + 通过PubSubJS消息订阅组件完成
-+ 通过Vuex状态保持组件完成（后面讲）
++ 通过Vuex状态保存组件完成（后面讲）
 #### PubSubJS方式
 1. 安装PubSubJS库
 ```cmd
@@ -386,7 +389,7 @@ yarn add pubsub-js
 ```
 2. 组件A添加消息订阅方法
 ```html
-<script src="./node_modules/pubsubjs/pubsub.js"></script>
+<script src="./node_modules/pubsub-js/src/pubsub.js"></script>
 ```
 ```js
 const ComponentA = {
@@ -477,7 +480,7 @@ const ComponentB = {
 在Vue1.x版本中推荐使用的是vue-resource
 
 官网文档是这个：https://github.com/pagekit/vue-resource/blob/develop/docs/http.md
-我们先用的是Vue2.x版本，官方推荐用的是Axios
+我们现在用的是Vue2.x版本，官方推荐用的是Axios
 
 ###  Axios基础
 1. 安装Axios库
