@@ -564,8 +564,12 @@ axios.get('public/db.json').then(response => {
 ```
 > created生命周期是最早能得到data的地方，所有一般在这里渲染初始化数据
 
+## TodoMVC
+现在Vue的基本知识算是讲完了，想要验证自己学的怎么样，建议去挑战一下TodoMVC项目，用学到的知识，按照自己的想法来通关，准备好了吗？下面就是传送门，祝你好运！
+http://todomvc.com/
+
 ## 了解前端项目构建打包
-[webpack介绍](webpack介绍.md)
+[召唤webpack介绍！](webpack介绍.md)
 
 ## Vue CLI脚手架
 ### 什么是Vue CLI
