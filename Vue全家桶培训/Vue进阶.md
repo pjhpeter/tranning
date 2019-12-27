@@ -653,14 +653,14 @@ yarn build
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/1226/120906_90831c61_5449551.png "屏幕截图.png")
 3. 修改Nginx配置文件nginx/conf/nginx.conf
 找到下面这一项
-```
+```shell
 location / {
     root   html;
     index  index.html index.htm;
 }
 ```
 改成这样
-```
+```shell
 location / {
     root   html/vue-project-training;
     index  index.html index.htm;
