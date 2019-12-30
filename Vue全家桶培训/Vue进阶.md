@@ -576,7 +576,7 @@ http://todomvc.com/
 
 ## Vue CLI脚手架
 ### 什么是Vue CLI
-Vue CLI是Vue官方提供的快速项目构建枸橘，集成了webpack，内置了大量常用工具，使项目构建更加标准化，是使用Vue全家桶开发项目的必备利器。
+Vue CLI是Vue官方提供的快速项目构建，集成了webpack，内置了大量常用工具，使项目构建更加标准化，是使用Vue全家桶开发项目的必备利器。
 ### 安装Vue CLI
 可全局安装和局部安装。
 ```cmd
@@ -584,7 +584,7 @@ yarn global add @vue/cli -D
 ```
 ### 使用Vue构建项目
 ```cmd
-vue create
+vue create <项目名称>
 ```
 > 如果没有配置yarn全局安装目录的环境变量，这里会报找不到命令的错误
 
